@@ -51,11 +51,10 @@ This method is invoked before `getInitialState` and therefore cannot rely on `th
 object propTypes
 ```
 
-The `propTypes` object allows you to validate props being passed to your components. For more information about `propTypes`, see [Reusable Components](/react/docs/reusable-components.html).
+The `propTypes` object allows you to validate props being passed to your components. See also: [Reusable Components](/react/docs/reusable-components.html).
 
 <!-- TODO: Document propTypes here directly. -->
- Collection of methods that allow declaration and validation of props that are
- supplied to React components. Example usage:
+Example usage:
 
 ```
 var Props = require('ReactPropTypes');
