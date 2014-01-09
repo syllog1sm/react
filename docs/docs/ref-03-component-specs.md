@@ -54,7 +54,55 @@ object propTypes
 The `propTypes` object allows you to validate props being passed to your components. For more information about `propTypes`, see [Reusable Components](/react/docs/reusable-components.html).
 
 <!-- TODO: Document propTypes here directly. -->
+ Collection of methods that allow declaration and validation of props that are
+ supplied to React components. Example usage:
 
+```
+var Props = require('ReactPropTypes');
+    var MyArticle = React.createClass({
+        propTypes: {
+            // An optional string prop named "description".
+            description: Props.string,
+ 
+            // A required enum prop named "category".
+            category: Props.oneOf(['News','Photos']).isRequired,
+ 
+            // A prop named "dialog" that requires an instance of Dialog.
+           dialog: Props.instanceOf(Dialog).isRequired
+       },
+       render: function() { ... }
+       });
+```
+ 
+ A more formal specification of how these methods are used:
+
+
+    type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+    decl := ReactPropTypes.{type}(.isRequired)?
+
+Each and every declaration produces a function with the same signature. This
+allows the creation of custom validation functions. For example:
+ 
+``` 
+    var Props = require('ReactPropTypes');
+    var MyLink = React.createClass({
+    propTypes: {
+        // An optional string or URI prop named "href".
+        href: function(props, propName, componentName) {
+           var propValue = props[propName];
+           invariant(
+             propValue == null ||
+             typeof propValue === 'string' ||
+             propValue instanceof URI,
+             'Invalid `%s` supplied to `%s`, expected string or URI.',
+             propName,
+             componentName
+           );
+         }
+       },
+       render: function() { ... }
+     });
+```
 
 ### mixins
 
